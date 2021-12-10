@@ -15,19 +15,22 @@ public class JpaMain {
         EntityManager em = emf.createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
-        tx.begin(); // Transaction 시작
+        tx.begin(); // Transaction 시작     // JPA에서 데이터를 변경하는 작업은 반드시 Transaction안에서 진행해야함!
 
-        Member member = new Member();
+        /* 실제는 스프링이 이런 코드들을 다 제거하기 때문에 */
+        try {
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("helloB");
 
-        member.setId(2L);
-        member.setName("helloB");
-        // JPA에서 데이터를 변경하는 작업은 반드시 Transaction안에서 진행해야함!
+            em.persist(member);
 
-        em.persist(member);
-
-        tx.commit();
-
-        em.close();
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+            em.close();
+        }
 
         emf.close();
 
