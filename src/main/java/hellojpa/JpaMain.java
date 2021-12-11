@@ -35,7 +35,7 @@ public class JpaMain {
         }
 */
         try {
-            /* 조
+            /* 조회
              * entity manager는 java collection처럼 생각하면 된다!
             Member findMember = em.find(Member.class, 1L);
             System.out.println("findMember.getId = " + findMember.getId());
@@ -51,12 +51,23 @@ public class JpaMain {
 //            findMember.setName("HelloJPA");
 //            // JPA를 통해 Entity를 가져오면, JPA가 변경여부를 CHECK! Update Query를 짜준다.
 
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+/*            List<Member> result = em.createQuery("select m from Member as m", Member.class)
                     .getResultList();
 
             for (Member member : result) {
                 System.out.println("member.getName() = " + member.getName());
             }
+*/
+
+            // 비영속
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("Hello JPA");
+
+            // 영속 상태! -> Entity Manager를 통해 객체 관리
+            System.out.println("=========> BEFORE");
+            em.persist(member);
+            System.out.println("=========> AFTER");
 
             tx.commit();
         } catch (Exception e) {
