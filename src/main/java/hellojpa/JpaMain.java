@@ -86,11 +86,33 @@ public class JpaMain {
             System.out.println("=============");
             */
 
+/*
             Member member = em.find(Member.class, 150L);
             member.setName("DANADOT");
             // persist를 별도 호출해주지 않아도 됨! -> 변경감지!!
+*/
+/*
+            Member member = new Member(201L, "MEEPONG");
+            em.persist(member);
 
-            tx.commit(); // 진짜 DB QUERY
+            em.flush(); // 강제 호출 -> DB에 있는 SQL을 보고싶어~
+*/
+
+            // 영속
+            Member member = em.find(Member.class, 150L);
+            member.setName("HEEEEELLO"); // Dirth Checking
+
+/*
+            em.detach(member); // 영속성 컨텍스트에서 떼어냄, JPA에서 관리하지 않음
+            // commit을 해도 Table의 데이터 변경이 되지 않음.
+*/
+
+            em.clear();
+
+            Member member2 = em.find(Member.class, 150L);
+
+            System.out.println("===================");
+            tx.commit();
         } catch (Exception e) {
             tx.rollback();
         } finally {
