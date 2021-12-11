@@ -58,10 +58,11 @@ public class JpaMain {
                 System.out.println("member.getName() = " + member.getName());
             }
 */
+/*
 
             // 비영속
             Member member = new Member();
-            member.setId(100L);
+            member.setId(101L);
             member.setName("Hello JPA");
 
             // 영속 상태! -> Entity Manager를 통해 객체 관리
@@ -69,7 +70,27 @@ public class JpaMain {
             em.persist(member);
             System.out.println("=========> AFTER");
 
-            tx.commit();
+            Member findMember = em.find(Member.class, 101L);
+
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getName() = " + findMember.getName());
+
+            // 여기서 객체 조회가 일어났는데, DB에 SELECT 쿼리가 나가지 않음! -> 1차 캐시 조회
+*/
+            /* 지연 로딩
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+
+            em.persist(member1);
+            em.persist(member2); // Entity, Query를 영속성 컨텍스트에 차곡차곡 쌓아둔다.
+            System.out.println("=============");
+            */
+
+            Member member = em.find(Member.class, 150L);
+            member.setName("DANADOT");
+            // persist를 별도 호출해주지 않아도 됨! -> 변경감지!!
+
+            tx.commit(); // 진짜 DB QUERY
         } catch (Exception e) {
             tx.rollback();
         } finally {
