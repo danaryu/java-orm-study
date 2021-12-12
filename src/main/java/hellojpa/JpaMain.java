@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
 
@@ -98,20 +97,20 @@ public class JpaMain {
             em.flush(); // 강제 호출 -> DB에 있는 SQL을 보고싶어~
 */
 
-            // 영속
+/*            // 영속
             Member member = em.find(Member.class, 150L);
             member.setName("HEEEEELLO"); // Dirth Checking
 
-/*
+*//*
             em.detach(member); // 영속성 컨텍스트에서 떼어냄, JPA에서 관리하지 않음
             // commit을 해도 Table의 데이터 변경이 되지 않음.
-*/
+*//*
 
             em.clear();
 
             Member member2 = em.find(Member.class, 150L);
 
-            System.out.println("===================");
+            System.out.println("===================");*/
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
