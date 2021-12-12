@@ -111,6 +111,14 @@ public class JpaMain {
             Member member2 = em.find(Member.class, 150L);
 
             System.out.println("===================");*/
+
+
+            Member member = new Member();
+            // member.setId("ID_A");
+            member.setUsername("C");
+
+            em.persist(member);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
