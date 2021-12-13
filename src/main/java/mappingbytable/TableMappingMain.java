@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class TableMappingMain {
 
@@ -19,19 +20,28 @@ public class TableMappingMain {
 
             // 저장
             Team team = new Team();
-            team.setName("TeamB");
+            team.setName("TeamA");
             em.persist(team);
 
             Member member = new Member();
-            member.setUsername("member2");
+            member.setUsername("member1");
             member.setTeam(team);
             //member.setTeamId(team.getId());
             em.persist(member);
 
+            em.flush();
+            em.clear();
+
             Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMember = " + findMember.getUsername());
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam.getId() = " + findTeam.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members) {
+                System.out.println("m.getUsername() = " + m.getUsername());
+            }
+
+//            System.out.println("findMember = " + findMember.getUsername());
+//            Team findTeam = findMember.getTeam();
+            //System.out.println("findTeam.getId() = " + findTeam.getId());
 //
 //            Member findMember = em.find(Member.class, member.getId());
 //            Long findTeamId = findMember.getTeamId();
