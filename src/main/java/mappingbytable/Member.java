@@ -42,7 +42,9 @@ public class Member {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void changeTeam(Team team) {
         this.team = team;
+        // 연관관계 설정 시 나 자신의 인스턴스도 상대 객체에다가 설정
+        team.getMembers().add(this);
     }
 }
