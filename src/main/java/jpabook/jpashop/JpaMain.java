@@ -21,6 +21,9 @@ public class JpaMain {
 
         try {
 
+            Order order = new Order();
+            //order.addOrderItem()
+
             /*
                 주문한 member를 찾고 싶을 때, order에서 memberId get
                     -> Id로 Member table에서 find
