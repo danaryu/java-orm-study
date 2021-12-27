@@ -13,7 +13,7 @@ public class Member {
     private Long id;
 
     @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>(); // 관례상 초기값
 
     private String name;
     private String city;

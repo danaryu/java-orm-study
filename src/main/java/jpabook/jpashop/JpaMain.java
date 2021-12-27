@@ -2,6 +2,7 @@ package jpabook.jpashop;
 
 import hellojpa.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +22,21 @@ public class JpaMain {
 
         try {
 
+            // 주문 예시
             Order order = new Order();
+            order.addOrderItem(new OrderItem());
+
+            /* 이렇게 예시 코드를 생성해도 문제없다.
+
+            Order order = new Order();
+            em.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
+            */
+
             //order.addOrderItem()
 
             /*
