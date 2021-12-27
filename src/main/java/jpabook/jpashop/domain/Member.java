@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
+//@Entity
 public class Member {
 
     @Id @GeneratedValue

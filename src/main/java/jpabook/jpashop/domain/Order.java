@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "ORDERS")
+//@Entity
+//@Table(name = "ORDERS")
 public class Order {
 
     @Id @GeneratedValue
@@ -19,6 +19,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
 
     // 연관관계의 주인(외래키 매핑)
     @OneToMany(mappedBy = "order")
